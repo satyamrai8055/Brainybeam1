@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag & Drop Block</title>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #drag-container {
+      margin: 20px auto;
+      width: 100px;
+      height: 100px;
+    }
+
+    #draggable-block {
+      width: 100px;
+      height: 100px;
+      background-color: #ff5722;
+      border-radius: 8px;
+      cursor: grab;
+    }
+
+    #drop-container {
+      margin: 20px auto;
+      width: 300px;
+      height: 150px;
+      border: 2px dashed #888;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f9f9f9;
+    }
+
+    #drop-container.drag-over {
+      border-color: #0066cc;
+      background-color: #e0f7ff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Drag & Drop Example (No Image)</h2>
+  <div id="drag-container">
+    <div id="draggable-block" draggable="true"></div>
+  </div>
+  <div id="drop-container">
+    <p>Drop the block here</p>
+  </div>
+
+  <script>
+    // JavaScript Code
+    const draggableBlock = document.getElementById('draggable-block');
+    const dropContainer = document.getElementById('drop-container');
+
+    // Prevent default behavior on drag events for the drop container
+    dropContainer.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropContainer.classList.add('drag-over');
+    });
+
+    dropContainer.addEventListener('dragleave', () => {
+      dropContainer.classList.remove('drag-over');
+    });
+
+    // Handle the drop event
+    dropContainer.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropContainer.classList.remove('drag-over');
+
+      // Append the block to the drop container
+      dropContainer.innerHTML = '';
+      dropContainer.appendChild(draggableBlock);
+    });
+  </script>
+</body>
+</html>
+
